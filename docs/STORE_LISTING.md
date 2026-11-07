@@ -72,9 +72,13 @@ Answer **No** to every question in the age-rating questionnaire: no violence, no
 
 ## 5. Store listings
 
-**Only two fields are mandatory** for this page to turn "Complete": a Description and at least one Screenshot, for at least one language (Microsoft Learn, *Add and edit Store listing info for MSIX app*). Everything else below is optional. A single completed English (United States) listing is enough — the other three language rows may stay "Not complete" and will not block Submit for certification.
+**Only two fields are mandatory per language**: a Description and at least one Screenshot (Microsoft Learn, *Add and edit Store listing info for MSIX app*). Everything else below is optional. The documentation says at least one completed language is sufficient, but in practice **every language row that remains listed must be complete**, otherwise the submission overview keeps *Store listings* at "Not complete" and the *Submit for certification* button stays disabled.
 
-**Verified in Partner Center (7 November 2026):** after entering the description and uploading the five screenshots, *English (United States)* shows a green **Complete** on the *Manage Store listing languages* page while 日本語 / 中文(台灣) / 中文(中國) remain **Not complete**. Do not click **Remove** on those rows — the form is not asking you to clean them up, and removing them would discard the localised Store pages. The warning "Store listings for other languages use one of the icons from the packages in this submission" is informational, not an error. Leave this page with **Cancel**.
+**Verified in Partner Center (7 November 2026):** after entering the full English description and uploading the five screenshots, *English (United States)* shows a green **Complete** on the *Manage Store listing languages* page while 日本語 / 中文(台灣) / 中文(中國) remain **Not complete** — and the submission overview still shows *Store listings* in red with the submit button greyed out.
+
+**The fix (fastest route):** open **Add/remove languages** from the overview, click **Remove** on each of the three incomplete rows, then click **Save** on that page. This removes only the Store *listing* language rows. The AppX manifest still declares all four languages and the in-app language switcher is unchanged; nothing is deleted from the package. It is reversible — click **Add** later if you want to publish a localised Store page. The alternative is to write a description and upload screenshots for each of the three languages.
+
+**Also:** click **Save** at the very bottom of each language's Store listing edit page. Keyword, copyright and developer edits are not persisted until then. Refresh the submission overview afterwards before checking the button state.
 
 Empty Xbox sections, Store logo placeholders (9:16 / 1:1 "required for display on Xbox"), trailers, the 16:9 hero image picker, short title, voice title, keywords, copyright, additional license terms and developer are all optional for a Windows-only desktop app. The 1:1 300 x 300 app icon is already taken from the package manifest. Screenshots were uploaded under the **Desktop (5)** tab; **Xbox (0)** stays empty.
 
