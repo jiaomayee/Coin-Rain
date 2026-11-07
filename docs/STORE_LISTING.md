@@ -74,6 +74,10 @@ Answer **No** to every question in the age-rating questionnaire: no violence, no
 
 **Only two fields are mandatory** for this page to turn "Complete": a Description and at least one Screenshot, for at least one language (Microsoft Learn, *Add and edit Store listing info for MSIX app*). Everything else below is optional. A single completed English (United States) listing is enough — the other three language rows may stay "Not complete" and will not block Submit for certification.
 
+**Verified in Partner Center (7 November 2026):** after entering the description and uploading the five screenshots, *English (United States)* shows a green **Complete** on the *Manage Store listing languages* page while 日本語 / 中文(台灣) / 中文(中國) remain **Not complete**. Do not click **Remove** on those rows — the form is not asking you to clean them up, and removing them would discard the localised Store pages. The warning "Store listings for other languages use one of the icons from the packages in this submission" is informational, not an error. Leave this page with **Cancel**.
+
+Empty Xbox sections, Store logo placeholders (9:16 / 1:1 "required for display on Xbox"), trailers, the 16:9 hero image picker, short title, voice title, keywords, copyright, additional license terms and developer are all optional for a Windows-only desktop app. The 1:1 300 x 300 app icon is already taken from the package manifest. Screenshots were uploaded under the **Desktop (5)** tab; **Xbox (0)** stays empty.
+
 On the submission overview, expand **Languages supported by your packages** and click **English (United States)** to open that language's listing form. Do not use "Add/remove languages" unless you specifically want to drop the other three rows.
 
 ### Field-by-field
