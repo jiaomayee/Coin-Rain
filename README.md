@@ -28,6 +28,8 @@ Privacy is a design constraint, not an afterthought:
 - **No offline catch-up.** The total is computed from timestamps while the app is running; closing the app does not silently add earnings for the time it was closed.
 - Currency conversion uses a static, built-in reference table for demonstration only. It is **not** live FX data and must not be used for payroll, accounting or trading.
 
+The full privacy policy is in [docs/PRIVACY.md](docs/PRIVACY.md). Microsoft Store submission copy is in [docs/STORE_LISTING.md](docs/STORE_LISTING.md).
+
 ## Getting started
 
 ### Run the packaged build
