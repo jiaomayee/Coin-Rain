@@ -72,13 +72,24 @@ Answer **No** to every question in the age-rating questionnaire: no violence, no
 
 ## 5. Store listings
 
-### Product name
-`Coin-Rain` (must exactly match the reserved product name)
+**Only two fields are mandatory** for this page to turn "Complete": a Description and at least one Screenshot, for at least one language (Microsoft Learn, *Add and edit Store listing info for MSIX app*). Everything else below is optional. A single completed English (United States) listing is enough — the other three language rows may stay "Not complete" and will not block Submit for certification.
 
-### Short description (for the summary line)
-`A tiny desktop widget that turns your income into an endless coin rain.`
+On the submission overview, expand **Languages supported by your packages** and click **English (United States)** to open that language's listing form. Do not use "Add/remove languages" unless you specifically want to drop the other three rows.
 
-### Full description — paste as-is
+### Field-by-field
+
+| Field | Required | Value |
+| --- | --- | --- |
+| Product name | Auto-filled from the package | `Coin-Rain` (must exactly match the reserved name) |
+| Description | **Required** | Paste the block below (max 10,000 plain-text chars, no URLs / HTML) |
+| Screenshots | **Required** | At least one of the five PNGs below (1920 x 1080) |
+| Short description | Optional, recommended | `A tiny desktop widget that turns your income into an endless coin rain.` |
+| Product features | Optional | Up to 20 short bullets, <= 200 chars each |
+| What's new in this version | Optional | **Leave blank for a first submission** |
+| Store logos | Optional | `docs/store-logo-300x300.png` if you want a custom 300 x 300 listing icon; the package logos are used by default |
+| Trailers / promotional images | Optional | None |
+
+### Description — paste as-is
 
 ```
 Coin-Rain is a tiny, always-on-top desktop widget that turns a monthly income figure into an endless, gently falling coin rain. Enter a number once, then watch your running total grow second by second while coins melt into a progress bar on their way down. It is a light-hearted way to make a long workday feel a little more rewarding.
