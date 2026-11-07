@@ -83,9 +83,9 @@ Existing `docs/preview.png` and `docs/open-source.png` are small crops for the R
 
 ### Privacy policy URL (dedicated field)
 
-`https://raw.githubusercontent.com/jiaomayee/Coin-Rain/main/docs/PRIVACY.md`
+`https://github.com/jiaomayee/Coin-Rain/blob/main/docs/PRIVACY.md` (verified reachable, HTTP 200)
 
-Fallback if the raw URL is not accepted: `https://github.com/jiaomayee/Coin-Rain/blob/main/docs/PRIVACY.md`
+Alternative plain-text URL if Partner Center prefers a raw document: `https://raw.githubusercontent.com/jiaomayee/Coin-Rain/main/docs/PRIVACY.md`. Note that some corporate networks in China cannot resolve `raw.githubusercontent.com`; that is a local network restriction and does not affect Microsoft's validation, but the blob URL above is the safer choice.
 
 ### Other listing fields
 
