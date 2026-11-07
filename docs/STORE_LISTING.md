@@ -33,10 +33,24 @@ Working notes for filling in the Partner Center submission pages. All customer-f
 ## 2. Properties
 
 - **Category:** `Productivity` (alternative: `Entertainment`; it is a desktop companion, not a game)
-- **Subcategory:** choose the closest general utility / personal option offered in the current form
+- **Subcategory / secondary category:** optional — leave empty if no suitable value is offered (Partner Center marks both as Not required)
 - **Keywords / search terms:** `coin rain`, `desktop widget`, `income`, `always on top`, `motivation`, `relaxing`, `offline`, `countdown`
 - **Hardware / system requirements:** Windows 10 version 1809 or later, x64. No special hardware.
 - **Package family / restricted capability:** see `runFullTrust` justification in section 6.
+
+### Privacy policy (mandatory for this app)
+
+The Properties page asks "Does your product access, collect or transmit personal information?" On this submission the answer **must stay `Yes`**, and **"Provide a privacy policy URL"** must stay selected. Choosing `No` (or switching to "Provide privacy policy text" without pasting the full text) and clicking Save silently reverts, and the red "This submission requires a privacy policy" warning stays.
+
+This is not a UI bug. Microsoft Store Policy 10.5.1 states that product types which inherently have access to personal information — explicitly including Desktop Bridge and Win32 products — must always have a privacy policy. Once the `.appx` is uploaded, Partner Center detects `runFullTrust` (the only capability in this package manifest) and locks the answer. `Yes` describes the app's capability, not an admission that data is uploaded; the policy text itself correctly states that nothing is collected or transmitted.
+
+**Privacy policy URL — paste exactly:**
+
+`https://github.com/jiaomayee/Coin-Rain/blob/main/docs/PRIVACY.md`
+
+Verified HTTP 200, publicly reachable, and the online file contains the full policy. Alternative plain-text URL: `https://raw.githubusercontent.com/jiaomayee/Coin-Rain/main/docs/PRIVACY.md` (some Chinese corporate networks cannot resolve that host; it is a local restriction only). A URL is preferred over pasting policy text because the document can be updated without a new submission.
+
+- **Support info (optional):** Website — `https://github.com/jiaomayee/Coin-Rain/issues`. Contact details are only mandatory for business/company developer accounts; if the page marks them required, fill them in.
 
 ---
 
@@ -98,11 +112,9 @@ Five PNG files in `docs/store/`, all **1920 x 1080**, built from real captures o
 
 Upload at least one; uploading all five is recommended. The older `docs/preview.png` and `docs/open-source.png` are small README crops and are **not** valid Store screenshots.
 
-### Privacy policy URL (dedicated field)
+### Privacy policy URL
 
-`https://github.com/jiaomayee/Coin-Rain/blob/main/docs/PRIVACY.md` (verified reachable, HTTP 200)
-
-Alternative plain-text URL if Partner Center prefers a raw document: `https://raw.githubusercontent.com/jiaomayee/Coin-Rain/main/docs/PRIVACY.md`. Note that some corporate networks in China cannot resolve `raw.githubusercontent.com`; that is a local network restriction and does not affect Microsoft's validation, but the blob URL above is the safer choice.
+This field belongs to the **Properties** page, not to Store listings — see section 2 for the exact URL and why the answer cannot be set to `No`.
 
 ### Other listing fields
 
