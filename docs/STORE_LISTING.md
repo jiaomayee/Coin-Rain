@@ -138,8 +138,8 @@ This field belongs to the **Properties** page, not to Store listings — see sec
 ### Other listing fields
 
 - **Support contact / website:** use the repository's Issues page as the support URL if a contact field is required
-- **Additional listing languages:** add `zh-CN`, `zh-TW` and `ja-JP` if you want localised Store pages; English alone is sufficient for submission
-- **What's new:** `Initial release.` (only shown on updates)
+- **Additional listing languages:** see the language-row fix at the top of section 5 — remove the three untranslated rows, or complete each with its own description and screenshots
+- **What's new:** leave blank on a first submission (Microsoft's explicit instruction); only fill it on later updates
 
 ---
 
@@ -147,11 +147,15 @@ This field belongs to the **Properties** page, not to Store listings — see sec
 
 ### Restricted capability justification (required because the manifest declares `runFullTrust`)
 
+Paste **only the paragraph inside the code block** into the "Why do you need the runFullTrust capability and how is it used in your product?" box on the **Submission options** page. Do **not** copy this Markdown heading or any `...` placeholder line — whatever is in that box is shown verbatim to the certification reviewer, and documentation scaffolding looks unprofessional.
+
 ```
 This is a packaged Win32 desktop application built with Electron. The runFullTrust capability is required for the desktop executable to launch and to provide the always-on-top widget window, tray icon and local settings storage. The app makes no network requests, installs no drivers, does not modify system settings outside its own data, and does not auto-start without the user enabling that option in the tray menu.
 ```
 
 ### Notes for certification testers
+
+The **Submission options** page has no text box for these notes; its "Certification notes" section links to a separate **Other testing information** page. This is optional but recommended — paste the five numbered lines there. Leave the release option at its default "Publish immediately after certification". Click **Save** at the bottom of the Submission options page.
 
 ```
 1. On first launch, choose a language and currency on the setup screen (defaults are English and USD) and click Start earning.
