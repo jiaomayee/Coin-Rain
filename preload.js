@@ -1,0 +1,25 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+// Screenshot / self-test launches must not be blocked by the first-run wizard.
+const selfCheck = Boolean(
+  process.env.COINRAIN_SHOT || process.env.COINRAIN_SHOT_FULL ||
+  process.env.COINRAIN_SHOT_IMMERSIVE || process.env.COINRAIN_SHOT_PANEL ||
+  process.env.COINRAIN_SHOT_LOCALE || process.env.COINRAIN_SELFTEST
+);
+
+contextBridge.exposeInMainWorld('coinRain', {
+  isElectron: true,
+  selfCheck: selfCheck,
+  load: () => ipcRenderer.invoke('cfg:load'),
+  save: (data) => ipcRenderer.invoke('cfg:save', data),
+  resize: (width, height) => ipcRenderer.send('win:resize', width, height),
+  setAlwaysOnTop: (value) => ipcRenderer.send('win:alwaysOnTop', value),
+  setKeepAwake: (value) => ipcRenderer.send('win:keepAwake', value),
+  minimize: () => ipcRenderer.send('win:minimize'),
+  hide: () => ipcRenderer.send('win:hide'),
+  close: () => ipcRenderer.send('win:close'),
+  setLocale: (lang) => ipcRenderer.send('app:setLocale', lang),
+  onSync: (callback) => {
+    ipcRenderer.on('cfg:sync', (_event, data) => callback(data));
+  }
+});

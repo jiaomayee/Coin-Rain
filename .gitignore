@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output (large binaries, installers, temporary verification builds)
+dist/
+dist-*/
+dist-v*/
+dist-fix/
+.verify-profile/
+.tools/
+verify-fix/
+verify-fix-selfcheck/
+*.appx
+*.msix
+*.exe
+*.msi
+*.pfx
+*.p7x
+*.cer
+*.log
+
+# Local screenshots kept at the repository root during development
+/*.png
+
+# Local maintenance scripts / machine-specific helpers
+build/cleanup-temp-builds.ps1
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/

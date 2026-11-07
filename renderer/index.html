@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coin-Rain</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="cyber" class="mini">
+  <div class="app" id="app">
+    <div class="titlebar" id="titlebar">
+      <span class="brand-dot"></span>
+      <span class="brand">Coin-Rain</span>
+      <span class="spacer"></span>
+      <button class="winbtn more" id="btnMore" data-i18n-title="tip.expand" title="Open Style Studio">···</button>
+      <button class="winbtn electron-only" id="btnMin" data-i18n-title="tip.minimize" title="Minimize">−</button>
+      <button class="winbtn close electron-only" id="btnClose" data-i18n-title="tip.close" title="Close">×</button>
+    </div>
+
+    <div class="rain-zone" id="rainZone">
+      <div class="stage" id="stage">
+        <div class="stage-inner">
+          <div class="amount" id="amount">$ 0.000</div>
+        </div>
+        <div class="bubble" id="bubble"></div>
+        <div class="achievement" id="achievement"></div>
+        <div class="setup-tip" id="setupTip"><span data-i18n="setup.tip">Set monthly income to start</span> <span aria-hidden="true">›</span></div>
+      </div>
+      <div class="track" id="track"><div class="fill" id="goalFill"></div></div>
+      <canvas id="rain"></canvas>
+    </div>
+
+    <div class="goal-meta" id="goalMeta">
+      <span id="goalText">Next · Bubble tea $2.52</span>
+      <span id="goalPct">0%</span>
+    </div>
+
+    <div class="resize-handle" id="resizeHandle" data-i18n-title="tip.resize" title="Drag down to resize (mini height is the minimum)">
+      <span class="grip"></span>
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="quick-actions">
+        <button class="ghost tiny" id="btnPause" data-i18n="panel.pause">Pause</button>
+        <button class="ghost tiny" id="btnCollapse" data-i18n="panel.collapse">Mini window</button>
+        <button class="ghost tiny" id="btnReset" data-i18n="panel.reset">Reset</button>
+      </div>
+
+      <section class="card">
+        <h3><span data-i18n="income.title">Income</span></h3>
+        <p class="hint" data-i18n="income.hint">Hidden instantly. Only the derived rate is stored, never your salary.</p>
+        <div class="row income-row">
+          <input id="income" type="password" inputmode="decimal" autocomplete="off" data-i18n-placeholder="income.placeholder" placeholder="Monthly income (hidden)">
+          <button class="primary" id="btnIncome" data-i18n="income.set">Set</button>
+        </div>
+        <div class="row two">
+          <label><span data-i18n="income.days">Workdays</span><input id="days" type="number" min="1" max="31" step="0.25"></label>
+          <label><span data-i18n="income.hours">Hours / day</span><input id="hours" type="number" min="1" max="24" step="0.5"></label>
+        </div>
+        <div class="row">
+          <label class="grow"><span data-i18n="income.scale">Time scale</span>
+            <select id="scale">
+              <option value="sec" data-i18n="scale.sec">per second</option>
+              <option value="min" data-i18n="scale.min">per minute</option>
+              <option value="hour" data-i18n="scale.hour">per hour</option>
+              <option value="day" data-i18n="scale.day">per workday</option>
+              <option value="drama" data-i18n="scale.drama">one episode (45 min)</option>
+            </select>
+          </label>
+        </div>
+        <p class="note" id="caliber"></p>
+      </section>
+
+      <section class="card" id="localeCard">
+        <h3><span data-i18n="locale.title">Language &amp; Currency</span></h3>
+        <div class="row locale-row">
+          <label class="grow"><span data-i18n="locale.language">Language</span>
+            <select id="lang"></select>
+          </label>
+        </div>
+        <div class="row locale-row">
+          <label class="grow"><span data-i18n="locale.currency">Currency</span>
+            <select id="currency"></select>
+          </label>
+        </div>
+        <p class="note" data-i18n="locale.note">Built-in offline reference rates, demo only — not live FX. Switching currency converts your running total.</p>
+      </section>
+
+      <section class="card">
+        <h3><span data-i18n="studio.title">Style Studio</span> <button class="ghost tiny" id="btnRandom" data-i18n="studio.random">Surprise me</button></h3>
+        <div class="themes" id="themes">
+          <button class="theme-chip" data-theme="warm"><i class="sw warm"></i><span data-i18n="theme.warm">Warm Gold</span></button>
+          <button class="theme-chip" data-theme="cyber"><i class="sw cyber"></i><span data-i18n="theme.cyber">Cyber Vault</span></button>
+          <button class="theme-chip" data-theme="cream"><i class="sw cream"></i><span data-i18n="theme.cream">Cream</span></button>
+          <button class="theme-chip" data-theme="minimal"><i class="sw minimal"></i><span data-i18n="theme.minimal">Minimal</span></button>
+        </div>
+        <div class="shapes">
+          <span class="tag" data-i18n="shapes.tag">Particles</span>
+          <button class="shape-chip" data-shape="coin" data-i18n="shapes.coin">Coin</button>
+          <button class="shape-chip" data-shape="envelope" data-i18n="shapes.envelope">Envelope</button>
+          <button class="shape-chip" data-shape="star" data-i18n="shapes.star">Star</button>
+        </div>
+        <label class="slider"><span data-i18n="slider.density">Coin density</span> <b id="densityVal"></b><input id="density" type="range" min="6" max="60" step="1"></label>
+        <label class="slider"><span data-i18n="slider.speed">Fall speed</span> <b id="speedVal"></b><input id="speed" type="range" min="0.4" max="2.4" step="0.1"></label>
+        <label class="slider"><span data-i18n="slider.motion">Effects</span> <b id="motionVal"></b><input id="motion" type="range" min="0.4" max="1.8" step="0.1"></label>
+        <label class="slider"><span data-i18n="slider.freq">Cheer frequency</span> <b id="freqVal"></b><input id="freq" type="range" min="0" max="1" step="0.1"></label>
+      </section>
+
+      <section class="card">
+        <h3><span data-i18n="idle.title">Desktop</span></h3>
+        <label class="switch"><input id="optSound" type="checkbox"><span data-i18n="opt.sound">Coin sound</span></label>
+        <label class="switch"><input id="optBump" type="checkbox"><span data-i18n="opt.bump">Bump feedback</span></label>
+        <label class="switch"><input id="optTop" type="checkbox"><span data-i18n="opt.top">Always on top</span></label>
+        <label class="switch"><input id="optAwake" type="checkbox"><span data-i18n="opt.awake">Keep screen awake</span></label>
+        <label class="switch"><input id="optImmersive" type="checkbox"><span data-i18n="opt.immersive">Immersive · hide titlebar when idle</span></label>
+        <label class="slider"><span data-i18n="slider.idle">Idle delay</span> <b id="idleVal"></b><input id="idle" type="range" min="3" max="8" step="0.5"></label>
+      </section>
+
+      <p class="footer-note" data-i18n="footer.privacy">All data stays local · total resumes next launch</p>
+      <p class="footer-note copyright" data-i18n="footer.copyright">© 2026 ZanYu Studio · All rights reserved.</p>
+    </div>
+
+    <!-- In-app confirmation: native window.confirm() breaks frameless always-on-top
+         windows (modal can be hidden behind the widget and focus never returns). -->
+    <div class="overlay" id="confirmOverlay" hidden>
+      <div class="dialog-card" role="dialog" aria-modal="true">
+        <h3 id="confirmTitle"></h3>
+        <p id="confirmMessage"></p>
+        <div class="dialog-actions">
+          <button class="ghost tiny" id="confirmCancel"></button>
+          <button class="primary" id="confirmOk"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- First-run onboarding: language + currency must be chosen before the rain starts. -->
+    <div class="overlay onboard-overlay" id="onboardOverlay" hidden>
+      <div class="onboard-card">
+        <div class="onboard-eyebrow" id="onboardEyebrow"></div>
+        <div class="onboard-brand"><span class="brand-dot"></span> Coin-Rain</div>
+        <h2 id="onboardTitle"></h2>
+        <p class="onboard-subtitle" id="onboardSubtitle"></p>
+        <label class="onboard-field"><span id="onboardLangLabel"></span>
+          <select id="onboardLang"></select>
+        </label>
+        <label class="onboard-field"><span id="onboardCurrencyLabel"></span>
+          <select id="onboardCurrency"></select>
+        </label>
+        <div class="onboard-preview" id="onboardPreview"></div>
+        <button class="primary onboard-start" id="onboardStart"></button>
+        <p class="onboard-note" id="onboardNote"></p>
+      </div>
+    </div>
+  </div>
+  <script src="locale.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

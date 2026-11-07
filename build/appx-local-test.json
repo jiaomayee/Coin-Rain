@@ -1,0 +1,39 @@
+{
+  "appId": "com.coinrain.desktop.localtest",
+  "productName": "Coin-Rain",
+  "copyright": "Copyright © 2026 赞煜工作室",
+  "directories": {
+    "output": "dist-sideload",
+    "buildResources": "build"
+  },
+  "files": [
+    "main.js",
+    "preload.js",
+    "start.js",
+    "renderer/**/*",
+    "package.json"
+  ],
+  "win": {
+    "icon": "build/icon.ico",
+    "target": [
+      "appx"
+    ]
+  },
+  "appx": {
+    "identityName": "CoinRain.Desktop.LocalTest",
+    "publisher": "CN=CoinRain Local Test",
+    "publisherDisplayName": "CoinRain Local Test",
+    "displayName": "Coin-Rain (Local Test)",
+    "languages": [
+      "zh-CN",
+      "zh-TW",
+      "en-US",
+      "ja-JP"
+    ],
+    "backgroundColor": "#FFF6E5",
+    "minVersion": "10.0.17763.0",
+    "maxVersionTested": "10.0.22621.0",
+    "addAutoLaunchExtension": false,
+    "showNameOnTiles": true
+  }
+}

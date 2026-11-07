@@ -1,0 +1,65 @@
+{
+  "name": "coin-rain",
+  "version": "1.0.0",
+  "description": "Coin-Rain - a playful always-on-top desktop earnings widget for Windows",
+  "author": "赞煜工作室",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "node start.js",
+    "check": "node --check main.js && node --check preload.js && node --check renderer/locale.js && node --check renderer/app.js",
+    "pack": "electron-builder --dir",
+    "dist:win": "electron-builder --win nsis",
+    "dist:appx": "electron-builder --win appx",
+    "dist:appx:localtest": "electron-builder --win appx --config build/appx-local-test.json && powershell -NoProfile -ExecutionPolicy Bypass -File build/sign-local-appx.ps1"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.coinrain.desktop",
+    "productName": "Coin-Rain",
+    "copyright": "Copyright © 2026 赞煜工作室",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis",
+        "appx"
+      ]
+    },
+    "appx": {
+      "identityName": "CoinRain.Desktop",
+      "publisher": "CN=REPLACE_WITH_PARTNER_CENTER_PUBLISHER",
+      "publisherDisplayName": "REPLACE_WITH_PUBLISHER_DISPLAY_NAME",
+      "displayName": "Coin-Rain",
+      "languages": [
+        "zh-CN",
+        "zh-TW",
+        "en-US",
+        "ja-JP"
+      ],
+      "backgroundColor": "#FFF6E5",
+      "minVersion": "10.0.17763.0",
+      "maxVersionTested": "10.0.22621.0",
+      "addAutoLaunchExtension": false,
+      "showNameOnTiles": true
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
