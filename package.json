@@ -40,9 +40,10 @@
       ]
     },
     "appx": {
-      "identityName": "CoinRain.Desktop",
-      "publisher": "CN=REPLACE_WITH_PARTNER_CENTER_PUBLISHER",
-      "publisherDisplayName": "REPLACE_WITH_PUBLISHER_DISPLAY_NAME",
+      "identityName": "ZanYuStudio.Coin-Rain",
+      "applicationId": "ZanYuStudio.CoinRain",
+      "publisher": "CN=3B4E628D-9FA8-44F4-AEA2-1207A18F1FF4",
+      "publisherDisplayName": "ZanYu Studio",
       "displayName": "Coin-Rain",
       "languages": [
         "zh-CN",

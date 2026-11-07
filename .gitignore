@@ -20,6 +20,7 @@ verify-*/
 
 # Local screenshots kept at the repository root during development
 /*.png
+docs/shots/
 
 # Local maintenance scripts / machine-specific helpers
 build/cleanup-temp-builds.ps1

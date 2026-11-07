@@ -4,6 +4,20 @@ Working notes for filling in the Partner Center submission pages. All customer-f
 
 ---
 
+## 0. Store identity (confirmed from Partner Center)
+
+| Field | Value |
+| --- | --- |
+| Product name | `Coin-Rain` |
+| Package/Identity/Name | `ZanYuStudio.Coin-Rain` |
+| Package/Identity/Publisher | `CN=3B4E628D-9FA8-44F4-AEA2-1207A18F1FF4` |
+| Package/Properties/PublisherDisplayName | `ZanYu Studio` |
+| Store ID | `9P4QC0KH7HX2` |
+
+`dist/Coin-Rain 1.0.0.appx` has been rebuilt with exactly these values. Because the reserved identity contains a dash, `appx.applicationId` is set separately to `ZanYuStudio.CoinRain` — MSIX only permits letters, digits and periods in an Application Id. Do not change either value without rebuilding the package.
+
+---
+
 ## 1. Pricing and availability
 
 | Field | Value |
@@ -70,16 +84,19 @@ No account, no login, no network requests. Your monthly income is never written 
 Coin-Rain is an open-source project under the MIT license, developed with WorkBuddy and Tencent Hunyuan Hy4. Figures are illustrative and are not intended for payroll, accounting or trading use.
 ```
 
-### What to prepare for the screenshots field
+### Screenshots (ready to upload)
 
-Minimum 1 image, at least 1366 x 768; recommended 4 images at 1920 x 1080, PNG, no transparency, showing the app in a realistic desktop context:
+Five PNG files in `docs/store/`, all **1920 x 1080**, built from real captures of the packaged build in English / USD:
 
-1. Mini widget on a clean Windows desktop, coins mid-fall, total visible
-2. Full Style Studio with themes and particle shapes
-3. First-run language / currency wizard (English + USD)
-4. Immersive mode with the title bar retracted, plus the Open Source card
+| File | Shows |
+| --- | --- |
+| `01-desktop-widget.png` | Mini widget, coins falling and melting into the progress bar, running total |
+| `02-immersive.png` | Immersive mode with the title bar retracted |
+| `03-style-studio.png` | Expanded Style Studio with income, themes and language settings |
+| `04-first-run.png` | First-run language / currency wizard |
+| `05-open-source.png` | Open Source card, MIT license and ZanYu Studio copyright |
 
-Existing `docs/preview.png` and `docs/open-source.png` are small crops for the README and are **not** valid Store screenshots.
+Upload at least one; uploading all five is recommended. The older `docs/preview.png` and `docs/open-source.png` are small README crops and are **not** valid Store screenshots.
 
 ### Privacy policy URL (dedicated field)
 
@@ -123,7 +140,7 @@ This is a packaged Win32 desktop application built with Electron. The runFullTru
 
 ## Common rejection causes for this app
 
-- Publisher identity values (`identityName`, `publisher`, `publisherDisplayName`) not copied verbatim from Partner Center → Product identity
+- Publisher identity values (`identityName`, `publisher`, `publisherDisplayName`) not copied verbatim from Partner Center → Product identity (**resolved** in the current build; see section 0)
 - Reserved product name not exactly `Coin-Rain`
 - Uploading the self-signed local-test package instead of the unsigned Store package
 - Screenshots below 1366 x 768, or a missing privacy policy URL
