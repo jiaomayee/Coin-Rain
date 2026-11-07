@@ -9,6 +9,7 @@
   "files": [
     "main.js",
     "preload.js",
+    "links.js",
     "start.js",
     "renderer/**/*",
     "package.json"

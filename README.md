@@ -17,12 +17,13 @@ A tiny, always-on-top Windows desktop widget that turns your monthly income into
 - **13 currencies** — CNY, USD, EUR, GBP, JPY, HKD, TWD, KRW, SGD, AUD, CAD, INR, CHF — with built-in offline reference rates.
 - **4 themes, 3 particle shapes**, adjustable density, fall speed, effects, cheer frequency and idle delay.
 - Mini window, resizable height (drag the bottom grip), tray menu, always-on-top and keep-screen-awake options.
+- **Open source, in the app.** The Style Studio carries an Open Source card with the repository link, MIT license and the WorkBuddy / Hunyuan Hy4 credit; the tray menu can open the repository too.
 
 ## Privacy
 
 Privacy is a design constraint, not an afterthought:
 
-- **No login, no account, no network requests.** The app works fully offline.
+- **No login, no account, no network requests.** The app works fully offline. The only way it ever reaches the outside is an explicit user click on the GitHub / WorkBuddy credits, which opens the link in your default browser.
 - **Your monthly income is never stored.** Only the derived per-second rate, the workday/hour basis and the running total are saved locally.
 - **No offline catch-up.** The total is computed from timestamps while the app is running; closing the app does not silently add earnings for the time it was closed.
 - Currency conversion uses a static, built-in reference table for demonstration only. It is **not** live FX data and must not be used for payroll, accounting or trading.
@@ -62,6 +63,7 @@ Useful scripts:
 ```
 main.js                 Electron main process, window, tray, config IPC
 preload.js              Safe contextBridge API for the renderer
+links.js                Allowlisted https links, resolved in the main process
 start.js                Development launcher
 renderer/index.html     Widget markup + first-run wizard + in-app dialog
 renderer/style.css      Themes, immersive transitions, overlays
@@ -75,6 +77,14 @@ Configuration is stored in the Electron `userData` folder (pinned to `coin-rain`
 ## A note on the in-app dialogs
 
 The widget deliberately avoids `window.confirm()`. Under a frameless, always-on-top Electron window a native synchronous modal can be hidden behind the widget and does not restore keyboard focus to the renderer, which makes every input look frozen. All confirmations are rendered inside the page instead, and focus is explicitly handed back afterwards.
+
+## Open source in the app
+
+The credit is visible in three places: the **Open Source** card at the bottom of the expanded Style Studio (with a `View on GitHub` button and a `Copy link` button), the first-run wizard footer, and the tray menu. The development credit is always shown in English — *Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.* — while the surrounding labels follow the selected UI language.
+
+![Open Source card inside the widget](docs/open-source.png)
+
+For safety the renderer never passes a raw URL to Electron. It sends a small key such as `repo`, and `links.js` in the main process resolves it against an `https`-only allowlist before calling `shell.openExternal` or writing to the clipboard. No automatic network access is introduced.
 
 ## Acknowledgements
 

@@ -1,7 +1,8 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, powerSaveBlocker, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, powerSaveBlocker, screen, shell, clipboard } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const L = require('./renderer/locale.js');
+const LINKS = require('./links.js');
 
 let win = null;
 let tray = null;
@@ -73,6 +74,31 @@ function saveBounds() {
   }, 350);
 }
 
+/* Only explicit user actions may leave the widget. COINRAIN_NO_EXTERNAL is a
+ * self-test switch: it validates the whole click -> IPC -> resolver chain
+ * without actually launching a browser or overwriting the user's clipboard. */
+function openLink(key) {
+  const url = LINKS.resolve(key);
+  if (!url) return false;
+  if (process.env.COINRAIN_NO_EXTERNAL) {
+    console.log('OPEN_LINK_SELFTEST: ' + key + ' -> ' + url);
+    return true;
+  }
+  shell.openExternal(url).catch((err) => console.warn('openExternal failed:', err.message));
+  return true;
+}
+
+function copyLink(key) {
+  const url = LINKS.resolve(key);
+  if (!url) return false;
+  if (process.env.COINRAIN_NO_EXTERNAL) {
+    console.log('COPY_LINK_SELFTEST: ' + key + ' -> ' + url);
+    return true;
+  }
+  clipboard.writeText(url);
+  return true;
+}
+
 function createTray() {
   try {
     const iconPath = path.join(__dirname, 'build', 'icon.png');
@@ -112,6 +138,10 @@ function createTray() {
         click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked })
       },
       { type: 'separator' },
+      {
+        label: L.t(uiLang, 'tray.github'),
+        click: () => openLink('repo')
+      },
       {
         label: L.t(uiLang, 'tray.quit'),
         click: () => {
@@ -237,8 +267,10 @@ function createWindow() {
               setTimeout(() => {
                 captureShot(win, shotFull);
                 if (shotPanel) {
-                  const scrollJs = shotScroll === 'locale'
-                    ? "var p=document.getElementById('panel'); if(p){var c=document.getElementById('localeCard'); p.scrollTop = c.getBoundingClientRect().top - p.getBoundingClientRect().top + p.scrollTop - 8;}"
+                  const cardId = shotScroll === 'locale' ? 'localeCard'
+                    : (shotScroll === 'about' ? 'ossCard' : '');
+                  const scrollJs = cardId
+                    ? "var p=document.getElementById('panel'); var c=document.getElementById('" + cardId + "'); if(p&&c){p.scrollTop = c.getBoundingClientRect().top - p.getBoundingClientRect().top + p.scrollTop - 8;}"
                     : (shotScroll !== ''
                         ? "var p=document.getElementById('panel'); if(p) p.scrollTop=" + Number(shotScroll) + ";"
                         : "var p=document.getElementById('panel'); if(p) p.scrollTop=p.scrollHeight;");
@@ -293,6 +325,8 @@ if (!singleInstance) {
     uiLang = next;
     createTray();
   });
+  ipcMain.on('app:openLink', (_event, key) => openLink(String(key || '')));
+  ipcMain.handle('app:copyLink', (_event, key) => copyLink(String(key || '')));
 
   app.whenReady().then(createWindow);
   app.on('window-all-closed', () => {

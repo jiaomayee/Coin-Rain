@@ -8,8 +8,7 @@ dist-v*/
 dist-fix/
 .verify-profile/
 .tools/
-verify-fix/
-verify-fix-selfcheck/
+verify-*/
 *.appx
 *.msix
 *.exe

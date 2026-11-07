@@ -104,8 +104,15 @@
     'onboard.start': '开始收金币',
     'onboard.note': '全程离线 · 数据只留在本机 · 汇率为趣味演示',
     'dialog.cancel': '取消', 'dialog.confirm': '确定',
+    'about.title': '开源信息',
+    'about.credit': 'Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.',
+    'about.repo': '仓库', 'about.open': '前往 GitHub', 'about.copy': '复制链接',
+    'about.copied': '仓库链接已复制',
+    'about.note': 'MIT 许可 · 完全开源。链接会在浏览器中打开，挂件本身不联网。',
+    'onboard.oss': 'Open source · MIT · WorkBuddy + Hunyuan Hy4',
     'tray.show': '显示 / 隐藏', 'tray.top': '窗口置顶',
-    'tray.auto': '开机自动启动', 'tray.quit': '退出'
+    'tray.auto': '开机自动启动', 'tray.quit': '退出',
+    'tray.github': '在 GitHub 查看源码'
   };
 
   var zhTW = {
@@ -165,8 +172,15 @@
     'onboard.start': '開始收金幣',
     'onboard.note': '全程離線 · 資料只留在本機 · 匯率為趣味展示',
     'dialog.cancel': '取消', 'dialog.confirm': '確定',
+    'about.title': '開源資訊',
+    'about.credit': 'Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.',
+    'about.repo': '儲存庫', 'about.open': '在 GitHub 開啟', 'about.copy': '複製連結',
+    'about.copied': '倉庫連結已複製',
+    'about.note': 'MIT 授權 · 完全開源。連結會在瀏覽器開啟，小工具本身不連網。',
+    'onboard.oss': 'Open source · MIT · WorkBuddy + Hunyuan Hy4',
     'tray.show': '顯示 / 隱藏', 'tray.top': '視窗置頂',
-    'tray.auto': '開機自動啟動', 'tray.quit': '退出'
+    'tray.auto': '開機自動啟動', 'tray.quit': '退出',
+    'tray.github': '在 GitHub 查看原始碼'
   };
 
   var enUS = {
@@ -228,8 +242,15 @@
     'onboard.start': 'Start earning',
     'onboard.note': 'Fully offline · data stays on this device · demo rates only',
     'dialog.cancel': 'Cancel', 'dialog.confirm': 'Confirm',
+    'about.title': 'Open Source',
+    'about.credit': 'Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.',
+    'about.repo': 'Repository', 'about.open': 'View on GitHub', 'about.copy': 'Copy link',
+    'about.copied': 'Repository link copied',
+    'about.note': 'MIT License · free and open source. Links open in your browser; the widget itself never connects to the network.',
+    'onboard.oss': 'Open source · MIT · WorkBuddy + Hunyuan Hy4',
     'tray.show': 'Show / Hide', 'tray.top': 'Always on top',
-    'tray.auto': 'Launch at login', 'tray.quit': 'Quit'
+    'tray.auto': 'Launch at login', 'tray.quit': 'Quit',
+    'tray.github': 'View on GitHub'
   };
 
   var jaJP = {
@@ -291,8 +312,15 @@
     'onboard.start': 'コインを受け取る',
     'onboard.note': '完全オフライン · データは端末内のみ · レートはデモ用',
     'dialog.cancel': 'キャンセル', 'dialog.confirm': '決定',
+    'about.title': 'オープンソース',
+    'about.credit': 'Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.',
+    'about.repo': 'リポジトリ', 'about.open': 'GitHub で表示', 'about.copy': 'リンクをコピー',
+    'about.copied': 'リンクをコピーしました',
+    'about.note': 'MIT ライセンス · 完全オープンソース。リンクはブラウザで開きます。ウィジェット自体は通信しません。',
+    'onboard.oss': 'Open source · MIT · WorkBuddy + Hunyuan Hy4',
     'tray.show': '表示 / 非表示', 'tray.top': '常に最前面',
-    'tray.auto': 'ログイン時に起動', 'tray.quit': '終了'
+    'tray.auto': 'ログイン時に起動', 'tray.quit': '終了',
+    'tray.github': 'GitHub でソースを見る'
   };
 
   var STRINGS = { 'zh-CN': zhCN, 'zh-TW': zhTW, 'en-US': enUS, 'ja-JP': jaJP };

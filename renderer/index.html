@@ -116,6 +116,17 @@
         <label class="slider"><span data-i18n="slider.idle">Idle delay</span> <b id="idleVal"></b><input id="idle" type="range" min="3" max="8" step="0.5"></label>
       </section>
 
+      <section class="card oss-card" id="ossCard">
+        <h3><span data-i18n="about.title">Open Source</span><span class="oss-badge">MIT</span></h3>
+        <p class="oss-credit" data-i18n="about.credit">Developed with WorkBuddy, powered by Tencent Hunyuan Hy4.</p>
+        <p class="oss-repo"><span data-i18n="about.repo">Repository</span> · <a href="#" id="ossRepoLink" data-open-link="repo" data-oss-url>github.com/jiaomayee/Coin-Rain</a></p>
+        <div class="oss-actions">
+          <button class="ghost tiny" id="btnOssOpen" type="button" data-open-link="repo" data-i18n="about.open">View on GitHub</button>
+          <button class="ghost tiny" id="btnCopyRepo" type="button" data-i18n="about.copy">Copy link</button>
+        </div>
+        <p class="note" data-i18n="about.note">MIT License · free and open source. Links open in your browser; the widget itself never connects to the network.</p>
+      </section>
+
       <p class="footer-note" data-i18n="footer.privacy">All data stays local · total resumes next launch</p>
       <p class="footer-note copyright" data-i18n="footer.copyright">© 2026 ZanYu Studio · All rights reserved.</p>
     </div>
@@ -149,6 +160,7 @@
         <div class="onboard-preview" id="onboardPreview"></div>
         <button class="primary onboard-start" id="onboardStart"></button>
         <p class="onboard-note" id="onboardNote"></p>
+        <p class="onboard-oss"><a href="#" id="onboardOss" data-open-link="repo">Open source · MIT · WorkBuddy + Hunyuan Hy4</a></p>
       </div>
     </div>
   </div>

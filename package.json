@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "node start.js",
-    "check": "node --check main.js && node --check preload.js && node --check renderer/locale.js && node --check renderer/app.js",
+    "check": "node --check main.js && node --check preload.js && node --check links.js && node --check start.js && node --check renderer/locale.js && node --check renderer/app.js",
     "pack": "electron-builder --dir",
     "dist:win": "electron-builder --win nsis",
     "dist:appx": "electron-builder --win appx",
@@ -28,6 +28,7 @@
     "files": [
       "main.js",
       "preload.js",
+      "links.js",
       "renderer/**/*",
       "package.json"
     ],

@@ -3,6 +3,10 @@
 
   const bridge = window.coinRain || null;
   const L = window.CoinRainLocale;
+  // URLs are supplied by the preload allowlist; the fallback keeps the plain
+  // browser preview usable when the renderer is opened without Electron.
+  const OSS_LINKS = (bridge && bridge.links) || { repo: 'https://github.com/jiaomayee/Coin-Rain' };
+  const REPO_DISPLAY = String(OSS_LINKS.repo || '').replace(/^https:\/\//, '');
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.prototype.slice.call(document.querySelectorAll(sel));
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -731,6 +735,7 @@
     $$('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
     $$('[data-i18n-title]').forEach((el) => { el.title = t(el.dataset.i18nTitle); });
     $$('[data-i18n-placeholder]').forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+    $$('[data-oss-url]').forEach((el) => { el.textContent = REPO_DISPLAY; });
     $('#btnPause').textContent = t(running ? 'panel.pause' : 'panel.resume');
     $('#btnMore').title = t(cfg.mini ? 'tip.expand' : 'tip.expanded');
     $('#caliber').textContent = t('income.caliber', cfg.days, cfg.hours,
@@ -952,6 +957,7 @@
     $('#onboardCurrencyLabel').textContent = L.t(lang, 'onboard.currency');
     $('#onboardStart').textContent = L.t(lang, 'onboard.start');
     $('#onboardNote').textContent = L.t(lang, 'onboard.note');
+    $('#onboardOss').textContent = L.t(lang, 'onboard.oss');
     const c = L.currency(onboardCurrency);
     const digits = c.digits === 0 ? 0 : 2;
     $('#onboardPreview').textContent = c.symbol + ' ' +
@@ -1133,6 +1139,30 @@
     $('#currency').addEventListener('change', (e) => setLocale(cfg.lang, e.target.value));
 
     $('#setupTip').addEventListener('click', openPanel);
+
+    // Open-source credits: the renderer passes only a link key, never a URL.
+    $$('[data-open-link]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const key = el.dataset.openLink || 'repo';
+        if (bridge && bridge.isElectron && typeof bridge.openLink === 'function') {
+          bridge.openLink(key);
+        } else {
+          const url = OSS_LINKS[key];
+          if (url) window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+
+    $('#btnCopyRepo').addEventListener('click', async () => {
+      let ok = false;
+      if (bridge && bridge.isElectron && typeof bridge.copyLink === 'function') {
+        try { ok = await bridge.copyLink('repo'); } catch (_) { ok = false; }
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        try { await navigator.clipboard.writeText(OSS_LINKS.repo); ok = true; } catch (_) { ok = false; }
+      }
+      showBubble(ok ? t('about.copied') : REPO_DISPLAY);
+    });
 
     $('#optImmersive').addEventListener('change', (e) => {
       cfg.immersive = e.target.checked;

@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const LINKS = require('./links.js');
 
 // Screenshot / self-test launches must not be blocked by the first-run wizard.
 const selfCheck = Boolean(
@@ -19,6 +20,10 @@ contextBridge.exposeInMainWorld('coinRain', {
   hide: () => ipcRenderer.send('win:hide'),
   close: () => ipcRenderer.send('win:close'),
   setLocale: (lang) => ipcRenderer.send('app:setLocale', lang),
+  // Renderer only ever passes a key; the URL itself is resolved in the main process.
+  links: Object.assign({}, LINKS.LINKS),
+  openLink: (key) => ipcRenderer.send('app:openLink', String(key || '')),
+  copyLink: (key) => ipcRenderer.invoke('app:copyLink', String(key || '')),
   onSync: (callback) => {
     ipcRenderer.on('cfg:sync', (_event, data) => callback(data));
   }
